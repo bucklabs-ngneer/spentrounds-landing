@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpentRounds - Smart Ammunition Inventory Management</title>
+    <meta name="description" content="Track every round. Track every dollar. Smart ammunition inventory management with automatic FIFO rotation for serious shooters.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #2C2C2C;
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 20px 0;
+            border-bottom: 2px solid #D4A574;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 90px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 72px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #F5F5F5 0%, #EAEAEA 100%);
+            padding: 100px 0;
+            text-align: center;
+            border-bottom: 2px solid #D4A574;
+        }
+
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: #2C2C2C;
+            font-weight: 400;
+        }
+
+        .hero h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #666666;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #666666;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #6B7A3F;
+            color: white;
+            padding: 18px 40px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #3D5A3D;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(107, 122, 63, 0.3);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .light-section {
+            background: white;
+        }
+
+        .dark-section {
+            background: #F5F5F5;
+        }
+
+        section h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 52px;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #2C2C2C;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 6px;
+            border: 2px solid #D4A574;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #6B7A3F;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-card p {
+            color: #666666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .feature-card ul {
+            margin-top: 15px;
+            padding-left: 20px;
+            color: #666666;
+        }
+
+        .feature-card li {
+            margin: 8px 0;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .use-case {
+            background: white;
+            padding: 25px;
+            border-radius: 6px;
+            border-left: 4px solid #6B7A3F;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .use-case h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2C2C2C;
+            font-weight: 600;
+        }
+
+        .use-case p {
+            color: #666666;
+            font-size: 15px;
+        }
+
+        /* What's Built Section */
+        .whats-built {
+            background: #6B7A3F;
+            color: white;
+            padding: 80px 0;
+        }
+
+        .whats-built h2 {
+            color: white;
+        }
+
+        .built-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .built-column h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #D4A574;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .built-column ul {
+            list-style: none;
+        }
+
+        .built-column li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #EFEFEF;
+        }
+
+        .built-column li:before {
+            margin-right: 10px;
+        }
+
+        .working li:before { content: "✅ "; }
+        .coming li:before { content: "📋 "; }
+
+        /* Beta Section */
+        .beta-section {
+            background: #D4A574;
+            color: #2C2C2C;
+            text-align: center;
+        }
+
+        .beta-section h2 {
+            color: #2C2C2C;
+        }
+
+        .beta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .beta-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .beta-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .beta-benefit {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 20px;
+            border-radius: 6px;
+        }
+
+        .beta-benefit h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            border-left: 4px solid #6B7A3F;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-item h3 {
+            color: #2C2C2C;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .faq-item p {
+            color: #666666;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #2C2C2C;
+            color: #999999;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #D4A574;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: #6B7A3F;
+        }
+
+        /* Beta Signup Form */
+        .beta-signup-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .beta-signup-form input[type="email"] {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #D4A574;
+            border-radius: 6px;
+            font-family: inherit;
+            background: white;
+            color: #2C2C2C;
+        }
+
+        .beta-signup-form input[type="email"]:focus {
+            outline: none;
+            border-color: #6B7A3F;
+            box-shadow: 0 0 0 3px rgba(107, 122, 63, 0.2);
+        }
+
+        .beta-signup-form input[type="email"]::placeholder {
+            color: #999;
+        }
+
+        .beta-signup-form .cta-button {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .beta-signup-form .cta-button:hover {
+            background: #3D5A3D;
+        }
+
+        .already-invited {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .already-invited a {
+            color: #6B7A3F;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .already-invited a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-tagline {
+            font-size: 18px;
+            color: #CCCCCC;
+            margin-bottom: 10px;
+        }
+
+        /* Screenshot Gallery */
+        .screenshots-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .screenshot-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(107, 122, 63, 0.2);
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 3px solid #6B7A3F;
+        }
+
+        .screenshot-placeholder img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .screenshot-caption {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .screenshot-caption h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: #2C2C2C;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .screenshot-caption p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero h2 {
+                font-size: 24px;
+            }
+
+            section h2 {
+                font-size: 36px;
+            }
+
+            .features-grid,
+            .use-cases,
+            .built-grid,
+            .beta-benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots-gallery {
+                gap: 25px;
+            }
+
+            .screenshot-caption h3 {
+                font-size: 20px;
+            }
+
+            .screenshot-caption p {
+                font-size: 13px;
+            }
+
+            .beta-signup-form {
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <a href="#" class="logo"><img src="spentrounds.png" alt="SpentRounds"></a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>TRACK EVERY ROUND.<br>TRACK EVERY DOLLAR.</h1>
+            <h2>Smart Ammunition Inventory with Automatic FIFO Rotation</h2>
+            <p>Stop guessing about your ammo inventory. Know exactly what you have, where it is, and what to shoot first.</p>
+            <a href="https://app.spentrounds.io/login" class="cta-button">Sign Up Free</a>
+            <p class="already-invited">Sign in with Google or GitHub to get started</p>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="light-section">
+        <div class="container">
+            <h2>Your Ammo. Your Investment. Under Control.</h2>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 18px; color: #666; margin-bottom: 20px;">
+                    You've invested thousands in ammunition. It's scattered across safes, range bags, and storage units.
+                    You buy in bulk when prices are good. But tracking it all in a spreadsheet? Formulas break,
+                    versions conflict, and there's no way to track which ammo to shoot first.
+                </p>
+                <p style="font-size: 20px; color: #6B7A3F; font-weight: 600;">
+                    SpentRounds solves this. Purpose-built for ammunition tracking by someone who had the same problem.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Gallery -->
+    <section class="dark-section">
+        <div class="container">
+            <h2>SEE IT IN ACTION</h2>
+            <div class="screenshots-gallery">
+                <div class="screenshot-item">
+                    <div class="screenshot-placeholder">
+                        <img src="screenshot-dashboard.png" alt="Dashboard Overview">
+
+                    </div>
+                    <div class="screenshot-caption">
+                        <h3>Dashboard Overview</h3>
+                        <p>Get instant visibility into your entire ammunition inventory at a glance</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-item">
+                    <div class="screenshot-placeholder">
+                        <img src="screenshot-inventory.png" alt="Inventory Management">
+
+                    </div>
+                    <div class="screenshot-caption">
+                        <h3>Inventory Management</h3>
+                        <p>Track every round with detailed location and purchase information</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-item">
+                    <div class="screenshot-placeholder">
+                        <img src="screenshot-analytics.png" alt="Analytics & Insights">
+
+                    </div>
+                    <div class="screenshot-caption">
+                        <h3>Analytics & Insights</h3>
+                        <p>Understand your spending patterns and inventory trends</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="light-section">
+        <div class="container">
+            <h2>EVERYTHING YOU NEED</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Smart Purchase Tracking</h3>
+                    <p>Record every ammunition purchase with auto-generated PO numbers (PO-2025-001 format). Track price per round, vendor, and purchase date.</p>
+                    <ul>
+                        <li>Two processing modes: staging or direct placement</li>
+                        <li>Full purchase history</li>
+                        <li>Real cost tracking</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Flexible Location System</h3>
+                    <p>15-level hierarchical storage from building to bag. Create custom location types like "Pelican Case" or "Ammo Can" with smart nesting rules.</p>
+                    <ul>
+                        <li>Organize across multiple locations</li>
+                        <li>Move inventory (full or partial)</li>
+                        <li>Custom container types</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>FIFO Rotation System</h3>
+                    <p>Always shoot your oldest ammo first. Automatic first-in, first-out tracking ensures proper rotation and prevents old stock from sitting.</p>
+                    <ul>
+                        <li>Automatic age-based consumption ordering</li>
+                        <li>Tracks lot numbers and acquisition dates</li>
+                        <li>Handles partial box consumption accurately</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real Analytics Dashboard</h3>
+                    <p>See your inventory at a glance with visual charts. Track total rounds, current value, cost per round, and get low stock alerts.</p>
+                    <ul>
+                        <li>Caliber distribution pie charts</li>
+                        <li>Location breakdown</li>
+                        <li>Configurable stock alerts</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="light-section">
+        <div class="container">
+            <h2>Built for Different Shooting Styles</h2>
+            <div class="use-cases">
+                <div class="use-case">
+                    <h4>💰 The Cost-Conscious Shooter</h4>
+                    <p>Track cost per round for every purchase. Monitor spending patterns and see your total investment. Set low stock alerts for your most-used calibers.</p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🛒 The Bulk Buyer</h4>
+                    <p>Use FIFO to rotate stock properly. Track bulk purchase savings. Monitor age of stored ammunition to ensure quality.</p>
+                </div>
+
+                <div class="use-case">
+                    <h4>📚 The Organized Collector</h4>
+                    <p>Know exactly what you paid and where everything is stored. Track your total investment across multiple locations. See your spending patterns and inventory value.</p>
+                </div>
+
+                <div class="use-case">
+                    <h4>🏠 The Multi-Location Owner</h4>
+                    <p>Track inventory across home, cabin, vehicle, and range bag. Flexible location hierarchy handles your real storage situation. Know exactly what's where before you head out.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Built Section -->
+    <section class="whats-built">
+        <div class="container">
+            <h2>What's Actually Built</h2>
+            <p style="text-align: center; color: #EFEFEF; margin-bottom: 40px; font-size: 18px;">
+                Honest transparency about what's working today vs. what's coming soon
+            </p>
+            <div class="built-grid">
+                <div class="built-column working">
+                    <h3>✅ Working Today</h3>
+                    <ul>
+                        <li>Purchase tracking with PO numbers</li>
+                        <li>Custom location types</li>
+                        <li>FIFO consumption tracking</li>
+                        <li>Inventory reconciliation & adjustments</li>
+                        <li>Visual analytics dashboard</li>
+                        <li>Partial box handling</li>
+                        <li>Range session logging</li>
+                        <li>CSV export & full data download</li>
+                        <li>Secure multi-user support</li>
+                    </ul>
+                </div>
+
+                <div class="built-column coming">
+                    <h3>💭 Ideas Under Consideration</h3>
+                    <p style="font-size: 14px; margin-bottom: 15px; color: #EFEFEF;">
+                        Beta users help decide what gets built next. Currently exploring:
+                    </p>
+                    <ul>
+                        <li>CSV import</li>
+                        <li>Barcode scanning for quick entry</li>
+                        <li>Mobile browser optimization</li>
+                        <li>Purchase receipt attachments</li>
+                        <li>Reloading component tracking</li>
+                        <li>Ammo aging predictions</li>
+                    </ul>
+                    <p style="font-size: 14px; margin-top: 15px; color: #D4A574; font-style: italic;">
+                        Have different ideas? Tell me what you actually need.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beta Section -->
+    <section class="beta-section">
+        <div class="container">
+            <div class="beta-content">
+                <h2>Help Shape SpentRounds</h2>
+                <p>
+                    I built SpentRounds because I was frustrated tracking thousands of rounds in spreadsheets.
+                    As a solo developer and shooter, I'm building the tool I wish existed.
+                </p>
+                <p>
+                    Your beta access means you're not just a user — you're helping shape what this becomes.
+                </p>
+
+                <div class="beta-benefits">
+                    <div class="beta-benefit">
+                        <h4>🆓 Free Beta Access</h4>
+                        <p>No credit card required. Use all features as they're built.</p>
+                    </div>
+                    <div class="beta-benefit">
+                        <h4>💬 Direct Developer Access</h4>
+                        <p>Talk directly to me about features, bugs, and ideas.</p>
+                    </div>
+                    <div class="beta-benefit">
+                        <h4>🎯 Real Influence</h4>
+                        <p>Your feedback directly shapes what gets built next.</p>
+                    </div>
+                    <div class="beta-benefit">
+                        <h4>🎁 Founder Pricing</h4>
+                        <p>Special pricing when we launch (beta users first).</p>
+                    </div>
+                </div>
+
+                <a href="https://app.spentrounds.io/login" class="cta-button" style="margin-top: 20px;">Sign Up Free</a>
+                <p class="already-invited" style="color: #2C2C2C;">Sign in with Google or GitHub - no invite code needed</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="dark-section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>❓ How is this better than a spreadsheet?</h3>
+                    <p>
+                        Automatic FIFO calculations, no broken formulas, proper partial box handling, and organized location
+                        hierarchy. Access from any browser with no installation needed. Plus, no one can accidentally overwrite
+                        your data or break your formulas. It's purpose-built for ammunition, not adapted from Excel.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>🔒 Is my data private and secure?</h3>
+                    <p>
+                        Yes. Industry-standard BCrypt password hashing, HTTPS connections in production, field-level
+                        encryption for personal data, and row-level data isolation between users (every query filters
+                        by your user ID). Your inventory data is never shared or sold.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>📱 Is there a mobile app?</h3>
+                    <p>
+                        The web application is accessible from mobile browsers - no separate app needed. Mobile
+                        optimization is actively being improved based on beta user feedback. Native iOS/Android
+                        apps are on the roadmap.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>💰 What happens after beta?</h3>
+                    <p>
+                        Beta users get advance notice and special founding member pricing before any paid plans begin.
+                        You'll never be surprised with a bill. All beta testers are free through at least Q4 2026.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>📥 Can I import/export my data?</h3>
+                    <p>
+                        Yes! CSV export is available now - you can download your complete inventory data anytime.
+                        Your data belongs to you, and you can export it whenever you want. CSV import is on the
+                        roadmap for future releases, based on user feedback.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-tagline">Built by a shooter, for shooters.</p>
+            <p>
+                <a href="https://app.spentrounds.io">Launch App</a> |
+                Solo project by <a href="https://bucklabs.net" target="_blank">BuckLabs</a><br>
+                Questions? <a href="mailto:info@spentrounds.io">info@spentrounds.io</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 14px;">
+                © 2025 BuckLabs. SpentRounds is inventory software. We do not sell ammunition or firearms.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
