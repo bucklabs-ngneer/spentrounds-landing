@@ -477,17 +477,6 @@
             line-height: 1.5;
         }
 
-        .screenshot-row {
-            display: flex;
-            gap: 30px;
-            justify-content: center;
-        }
-
-        .screenshot-row .screenshot-item {
-            flex: 0 1 auto;
-            max-width: 350px;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -507,15 +496,6 @@
             .built-grid,
             .beta-benefits {
                 grid-template-columns: 1fr;
-            }
-
-            .screenshot-row {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .screenshot-row .screenshot-item {
-                max-width: 100%;
             }
 
             .screenshots-gallery {
@@ -610,40 +590,6 @@
                     </div>
                 </div>
 
-                <div class="screenshot-item">
-                    <div class="screenshot-placeholder">
-                        <img src="SpentRounds_ReloadComponents.png" alt="Reloading Components">
-
-                    </div>
-                    <div class="screenshot-caption">
-                        <h3>Reloading Components</h3>
-                        <p>Track primers, powder, brass, bullets, hulls, wads, and shot with fire count and lot tracking</p>
-                    </div>
-                </div>
-
-                <div class="screenshot-row">
-                    <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <img src="SpentRounds_RecipeCard.png" alt="Load Recipes">
-
-                        </div>
-                        <div class="screenshot-caption">
-                            <h3>Load Recipes</h3>
-                            <p>Save recipes, track batch history, and record shooting performance data</p>
-                        </div>
-                    </div>
-
-                    <div class="screenshot-item">
-                        <div class="screenshot-placeholder">
-                            <img src="SpentRounds_CreateBatch.png" alt="Batch Creation">
-
-                        </div>
-                        <div class="screenshot-caption">
-                            <h3>Batch Creation</h3>
-                            <p>Create batches with FIFO lot selection and automatic cost-per-round calculation</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -697,17 +643,6 @@
                     </ul>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
-                    <h3>Reloading Support</h3>
-                    <p>Full reloading workflow from component inventory to finished rounds. Track primers, powder, brass, bullets, and shotshell components.</p>
-                    <ul>
-                        <li>Component catalog with 400+ items</li>
-                        <li>Save and rate load recipes</li>
-                        <li>Batch tracking with performance logs</li>
-                        <li>Record velocity, SD, ES per session</li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -736,11 +671,6 @@
                     <h4>🏠 The Multi-Location Owner</h4>
                     <p>Track inventory across home, cabin, vehicle, and range bag. Flexible location hierarchy handles your real storage situation. Know exactly what's where before you head out.</p>
                 </div>
-
-                <div class="use-case">
-                    <h4>🔧 The Handloader</h4>
-                    <p>Track components, save load recipes, and log batch performance. Record velocity data across multiple sessions. Mark proven loads and build on what works.</p>
-                </div>
             </div>
         </div>
     </section>
@@ -748,9 +678,9 @@
     <!-- What's Built Section -->
     <section class="whats-built">
         <div class="container">
-            <h2>What's Actually Built</h2>
+            <h2>What's Built and Deployed</h2>
             <p style="text-align: center; color: #EFEFEF; margin-bottom: 40px; font-size: 18px;">
-                Honest transparency about what's working today vs. what's coming soon
+                Transparency about what's working and what's coming soon
             </p>
             <div class="built-grid">
                 <div class="built-column working">
@@ -765,9 +695,6 @@
                         <li>Range session logging</li>
                         <li>CSV export & full data download</li>
                         <li>Secure multi-user support</li>
-                        <li>Reloading: component inventory & catalog</li>
-                        <li>Reloading: load recipes with ratings</li>
-                        <li>Reloading: batch tracking & performance logs</li>
                     </ul>
                 </div>
 
@@ -777,9 +704,7 @@
                         Beta users help decide what gets built next. Currently exploring:
                     </p>
                     <ul>
-                        <li>CSV import</li>
                         <li>Barcode scanning for quick entry</li>
-                        <li>Mobile browser optimization</li>
                         <li>Purchase receipt attachments</li>
                         <li>Ammo aging predictions</li>
                     </ul>
