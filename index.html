@@ -6,6 +6,9 @@
     <title>SpentRounds - Smart Ammunition Inventory Management</title>
     <meta name="description" content="Track every round. Track every dollar. Smart ammunition inventory management with automatic FIFO rotation for serious shooters.">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -474,6 +477,17 @@
             line-height: 1.5;
         }
 
+        .screenshot-row {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .screenshot-row .screenshot-item {
+            flex: 0 1 auto;
+            max-width: 350px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -493,6 +507,15 @@
             .built-grid,
             .beta-benefits {
                 grid-template-columns: 1fr;
+            }
+
+            .screenshot-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .screenshot-row .screenshot-item {
+                max-width: 100%;
             }
 
             .screenshots-gallery {
@@ -527,8 +550,8 @@
             <h1>TRACK EVERY ROUND.<br>TRACK EVERY DOLLAR.</h1>
             <h2>Smart Ammunition Inventory with Automatic FIFO Rotation</h2>
             <p>Stop guessing about your ammo inventory. Know exactly what you have, where it is, and what to shoot first.</p>
-            <a href="https://app.spentrounds.io/login" class="cta-button">Sign Up Free</a>
-            <p class="already-invited">Sign in with Google or GitHub to get started</p>
+            <a href="https://app.spentrounds.io" class="cta-button">Get Started Free</a>
+            <p class="already-invited">Sign in with Google or GitHub</p>
         </div>
     </section>
 
@@ -586,6 +609,41 @@
                         <p>Understand your spending patterns and inventory trends</p>
                     </div>
                 </div>
+
+                <div class="screenshot-item">
+                    <div class="screenshot-placeholder">
+                        <img src="SpentRounds_ReloadComponents.png" alt="Reloading Components">
+
+                    </div>
+                    <div class="screenshot-caption">
+                        <h3>Reloading Components</h3>
+                        <p>Track primers, powder, brass, bullets, hulls, wads, and shot with fire count and lot tracking</p>
+                    </div>
+                </div>
+
+                <div class="screenshot-row">
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <img src="SpentRounds_RecipeCard.png" alt="Load Recipes">
+
+                        </div>
+                        <div class="screenshot-caption">
+                            <h3>Load Recipes</h3>
+                            <p>Save recipes, track batch history, and record shooting performance data</p>
+                        </div>
+                    </div>
+
+                    <div class="screenshot-item">
+                        <div class="screenshot-placeholder">
+                            <img src="SpentRounds_CreateBatch.png" alt="Batch Creation">
+
+                        </div>
+                        <div class="screenshot-caption">
+                            <h3>Batch Creation</h3>
+                            <p>Create batches with FIFO lot selection and automatic cost-per-round calculation</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -638,6 +696,18 @@
                         <li>Configurable stock alerts</li>
                     </ul>
                 </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Reloading Support</h3>
+                    <p>Full reloading workflow from component inventory to finished rounds. Track primers, powder, brass, bullets, and shotshell components.</p>
+                    <ul>
+                        <li>Component catalog with 400+ items</li>
+                        <li>Save and rate load recipes</li>
+                        <li>Batch tracking with performance logs</li>
+                        <li>Record velocity, SD, ES per session</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -666,6 +736,11 @@
                     <h4>🏠 The Multi-Location Owner</h4>
                     <p>Track inventory across home, cabin, vehicle, and range bag. Flexible location hierarchy handles your real storage situation. Know exactly what's where before you head out.</p>
                 </div>
+
+                <div class="use-case">
+                    <h4>🔧 The Handloader</h4>
+                    <p>Track components, save load recipes, and log batch performance. Record velocity data across multiple sessions. Mark proven loads and build on what works.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -690,6 +765,9 @@
                         <li>Range session logging</li>
                         <li>CSV export & full data download</li>
                         <li>Secure multi-user support</li>
+                        <li>Reloading: component inventory & catalog</li>
+                        <li>Reloading: load recipes with ratings</li>
+                        <li>Reloading: batch tracking & performance logs</li>
                     </ul>
                 </div>
 
@@ -703,7 +781,6 @@
                         <li>Barcode scanning for quick entry</li>
                         <li>Mobile browser optimization</li>
                         <li>Purchase receipt attachments</li>
-                        <li>Reloading component tracking</li>
                         <li>Ammo aging predictions</li>
                     </ul>
                     <p style="font-size: 14px; margin-top: 15px; color: #D4A574; font-style: italic;">
@@ -746,8 +823,8 @@
                     </div>
                 </div>
 
-                <a href="https://app.spentrounds.io/login" class="cta-button" style="margin-top: 20px;">Sign Up Free</a>
-                <p class="already-invited" style="color: #2C2C2C;">Sign in with Google or GitHub - no invite code needed</p>
+                <a href="https://app.spentrounds.io" class="cta-button" style="margin-top: 20px;">Get Started Free</a>
+                <p class="already-invited" style="color: #2C2C2C;">Sign in with Google or GitHub</p>
             </div>
         </div>
     </section>
@@ -788,7 +865,7 @@
                     <h3>💰 What happens after beta?</h3>
                     <p>
                         Beta users get advance notice and special founding member pricing before any paid plans begin.
-                        You'll never be surprised with a bill. All beta testers are free through at least Q4 2026.
+                        You'll never be surprised with a bill.
                     </p>
                 </div>
 

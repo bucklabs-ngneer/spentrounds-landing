@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Outer casing rim -->
+  <circle cx="32" cy="32" r="30" fill="#2d3a2e" stroke="#1a231b" stroke-width="2"/>
+  <!-- Casing base -->
+  <circle cx="32" cy="32" r="24" fill="#3d4a3e"/>
+  <!-- Inner ring -->
+  <circle cx="32" cy="32" r="18" fill="#2d3a2e"/>
+  <!-- Primer pocket -->
+  <circle cx="32" cy="32" r="12" fill="#4a5a4b"/>
+  <!-- Primer -->
+  <circle cx="32" cy="32" r="8" fill="#c9a227"/>
+  <!-- Firing pin strike -->
+  <circle cx="32" cy="32" r="3" fill="#8b7355"/>
+</svg>
